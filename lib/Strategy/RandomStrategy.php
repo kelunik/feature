@@ -3,6 +3,7 @@
 namespace Kelunik\Feature\Strategy;
 
 use Amp\Success;
+use Kelunik\Feature\Context;
 
 class RandomStrategy implements Strategy {
     private $threshold;
@@ -15,7 +16,7 @@ class RandomStrategy implements Strategy {
         $this->threshold = $threshold;
     }
 
-    public function isEnabled() {
+    public function isEnabled(Context $context) {
         return new Success(mt_rand(0, 99) < $this->threshold);
     }
 }

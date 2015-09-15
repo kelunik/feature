@@ -6,6 +6,7 @@ use Amp\Failure;
 use Kelunik\Feature\Strategy\Strategy;
 
 class Feature {
+    /** @var Strategy[] */
     private $features;
 
     public function __construct() {
@@ -20,9 +21,9 @@ class Feature {
         unset($this->features[$feature]);
     }
 
-    public function isEnabled($feature) {
+    public function isEnabled($feature, Context $context) {
         if (isset($this->features[$feature])) {
-            return $this->features[$feature]->isEnabled();
+            return $this->features[$feature]->isEnabled($context);
         }
 
         return new Failure(new NoSuchFeatureException("there's no strategy for that feature"));

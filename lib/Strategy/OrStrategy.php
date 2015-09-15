@@ -2,6 +2,7 @@
 
 namespace Kelunik\Feature\Strategy;
 
+use Kelunik\Feature\Context;
 use function Amp\all;
 use function Amp\pipe;
 
@@ -14,10 +15,10 @@ class OrStrategy implements Strategy {
         $this->second = $second;
     }
 
-    public function isEnabled() {
+    public function isEnabled(Context $context) {
         $all = all([
-            $this->first->isEnabled(),
-            $this->second->isEnabled(),
+            $this->first->isEnabled($context),
+            $this->second->isEnabled($context),
         ]);
 
         return pipe($all, function ($res) {
