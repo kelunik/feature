@@ -9,6 +9,8 @@ class ContextTest extends PHPUnit_Framework_TestCase {
     private $context;
 
     public function setUp() {
+        parent::setUp();
+
         $this->context = new Context;
     }
 

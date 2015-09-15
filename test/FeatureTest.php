@@ -16,6 +16,8 @@ class FeatureTest extends PHPUnit_Framework_TestCase {
     private $feature;
 
     public function setUp() {
+        parent::setUp();
+
         $this->feature = new Feature;
     }
 
