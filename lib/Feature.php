@@ -21,10 +21,8 @@ class Feature {
     }
 
     public function isEnabled($feature) {
-        $strategy = $this->features[$feature];
-
-        if ($strategy) {
-            return $strategy->isEnabled();
+        if (isset($this->features[$feature])) {
+            return $this->features[$feature]->isEnabled();
         }
 
         return new Failure(new NoSuchFeatureException("there's no strategy for that feature"));
