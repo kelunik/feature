@@ -12,13 +12,13 @@ use PHPUnit_Framework_TestCase;
 use function Amp\wait;
 
 class FeatureTest extends PHPUnit_Framework_TestCase {
-    /** @var Feature */
+    /** @var FeatureManager */
     private $feature;
 
     public function setUp() {
         parent::setUp();
 
-        $this->feature = new Feature;
+        $this->feature = new FeatureManager;
     }
 
     public function testAlways() {
@@ -92,7 +92,7 @@ class FeatureTest extends PHPUnit_Framework_TestCase {
      * @expectedException \Kelunik\Feature\NoSuchFeatureException
      */
     public function testThrowsOnUnknownFeature() {
-        wait($this->feature->isEnabled("random", new Context));
+        $this->feature->isEnabled("random", new Context);
     }
 
     /**

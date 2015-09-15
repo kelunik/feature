@@ -2,10 +2,9 @@
 
 namespace Kelunik\Feature;
 
-use Amp\Failure;
 use Kelunik\Feature\Strategy\Strategy;
 
-class Feature {
+class FeatureManager {
     /** @var Strategy[] */
     private $features;
 
@@ -22,10 +21,10 @@ class Feature {
     }
 
     public function isEnabled($feature, Context $context) {
-        if (isset($this->features[$feature])) {
-            return $this->features[$feature]->isEnabled($context);
+        if (!isset($this->features[$feature])) {
+            throw new NoSuchFeatureException("there's no strategy for that feature");
         }
 
-        return new Failure(new NoSuchFeatureException("there's no strategy for that feature"));
+        return $this->features[$feature]->isEnabled($context);
     }
 }
